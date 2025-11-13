@@ -14,23 +14,23 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
      * Creates new form MenuBotonesComida
      */
     public MenuBotonesComida() {
-        initComponents(); // NetBeans crea panelPrincipal con su GroupLayout AQUÍ
+        initComponents(); //se crea panelPrincipal con su GroupLayout 
 
-        // 1) crear el panel con fondo
+        // panel con fondo
         decorador.view.FotoFondo fondo = new decorador.view.FotoFondo("/decorador/paper2.jpg");
         fondo.setLayout(new java.awt.BorderLayout());
 
-        // 2) quitar panelPrincipal del contentPane actual
+        //quitar panelPrincipal del contentPane actual
         java.awt.Container cp = getContentPane();
         cp.remove(panelPrincipal);
 
-        // 3) transparencia para que se vea el fondo a través de panelPrincipal
+        //transparencia para que se vea el fondo a través de panelPrincipal
         panelPrincipal.setOpaque(false);
 
-        // 4) meter panelPrincipal dentro del fondo
+        //poner panelPrincipal dentro del fondo
         fondo.add(panelPrincipal, java.awt.BorderLayout.CENTER);
 
-        // 5) ahora sí, poner el fondo como contentPane
+        //poner el fondo como contentPane
         setContentPane(fondo);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
