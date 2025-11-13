@@ -8,13 +8,47 @@ package decorador.view;
  *
  * @author isaul
  */
-public class MenuBotonesComida extends javax.swing.JPanel {
+public class MenuBotonesComida extends javax.swing.JFrame  {
 
     /**
      * Creates new form MenuBotonesComida
      */
     public MenuBotonesComida() {
-        initComponents();
+        initComponents(); // NetBeans crea panelPrincipal con su GroupLayout AQUÍ
+
+        // 1) crear el panel con fondo
+        decorador.view.FotoFondo fondo = new decorador.view.FotoFondo("/decorador/paper2.jpg");
+        fondo.setLayout(new java.awt.BorderLayout());
+
+        // 2) quitar panelPrincipal del contentPane actual
+        java.awt.Container cp = getContentPane();
+        cp.remove(panelPrincipal);
+
+        // 3) transparencia para que se vea el fondo a través de panelPrincipal
+        panelPrincipal.setOpaque(false);
+
+        // 4) meter panelPrincipal dentro del fondo
+        fondo.add(panelPrincipal, java.awt.BorderLayout.CENTER);
+
+        // 5) ahora sí, poner el fondo como contentPane
+        setContentPane(fondo);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        pack();
+        setLocationRelativeTo(null);
+    }
+
+
+   
+    private void hacerTransparentes(java.awt.Container c) {
+        for (java.awt.Component comp : c.getComponents()) {
+            if (comp instanceof javax.swing.JPanel) {
+                ((javax.swing.JPanel) comp).setOpaque(false);
+            }
+            if (comp instanceof java.awt.Container) {
+                hacerTransparentes((java.awt.Container) comp);
+            }
+        }
     }
 
     /**
@@ -26,129 +60,67 @@ public class MenuBotonesComida extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelTabla = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        scrollPanelTabla = new javax.swing.JScrollPane();
-        panelDentroScrollTabla = new javax.swing.JPanel();
+        panelPrincipal = new javax.swing.JPanel();
+        panelFactura = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        botonGuardar = new javax.swing.JButton();
-        botonCancelar = new javax.swing.JButton();
-        scrollPanel = new javax.swing.JScrollPane();
-        panelDentroScroll = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        fotoCrema = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        fotoEnsalada = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        fotoAzucar = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        fotoTomate = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        fotoSalami = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        fotoVinagreta = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
-        fotoPepperoni = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
-        fotoEPollo = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
-        fotoQueso = new javax.swing.JLabel();
-        botonCafeSimple = new javax.swing.JButton();
-        botonCrema = new javax.swing.JButton();
+        tblFactura = new javax.swing.JTable();
+        jLabel11 = new javax.swing.JLabel();
+        pFCafe = new javax.swing.JPanel();
+        lblFCafe = new javax.swing.JLabel();
+        panelFCema = new javax.swing.JPanel();
+        lblFCrema = new javax.swing.JLabel();
+        panelFAzucar = new javax.swing.JPanel();
+        lblFAzucar = new javax.swing.JLabel();
+        panelFEnsalada = new javax.swing.JPanel();
+        lblFEnsalada = new javax.swing.JLabel();
+        panelFPizza = new javax.swing.JPanel();
+        lblFPizza = new javax.swing.JLabel();
+        panelFQueso = new javax.swing.JPanel();
+        lblFQueso = new javax.swing.JLabel();
+        paneleFVinagreta = new javax.swing.JPanel();
+        lblFVinagreta = new javax.swing.JLabel();
+        panelFPollo = new javax.swing.JPanel();
+        lblFPollo = new javax.swing.JLabel();
+        panelFTomate = new javax.swing.JPanel();
+        lblFTomate = new javax.swing.JLabel();
+        panelFSalami = new javax.swing.JPanel();
+        lblFSalami = new javax.swing.JLabel();
+        txtfCafe = new javax.swing.JTextField();
+        txtfEnsalada = new javax.swing.JTextField();
+        tctfEnsalada = new javax.swing.JTextField();
+        txtfCream = new javax.swing.JTextField();
+        txtfAzucar = new javax.swing.JTextField();
+        txtfVinagreta = new javax.swing.JTextField();
+        txtfPollo = new javax.swing.JTextField();
+        txtfTomate = new javax.swing.JTextField();
+        txtfSalami = new javax.swing.JTextField();
+        txtfPepperoni = new javax.swing.JTextField();
+        txtfQueso = new javax.swing.JTextField();
+        botonTomate = new javax.swing.JButton();
+        botonPollo = new javax.swing.JButton();
+        botonVinagreta = new javax.swing.JButton();
+        botonEnsalada = new javax.swing.JButton();
         botonAzucar = new javax.swing.JButton();
-        botonPizza = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        botonQueso = new javax.swing.JButton();
-        botonPepperoni = new javax.swing.JButton();
+        botonCrema = new javax.swing.JButton();
+        botonCafe = new javax.swing.JButton();
         botonSalami = new javax.swing.JButton();
-        panelTitulo = new javax.swing.JPanel();
+        botonPepperoni = new javax.swing.JButton();
+        botonQueso = new javax.swing.JButton();
+        botonPizza = new javax.swing.JButton();
+        panelFPeperoni = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        panelBanner = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton9 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        fotoCafe = new javax.swing.JLabel();
-        fotoPizza = new javax.swing.JLabel();
-        panelBotones = new javax.swing.JPanel();
 
-        panelTabla.setBackground(new java.awt.Color(249, 248, 213));
+        setPreferredSize(new java.awt.Dimension(1500, 800));
 
-        jPanel13.setBackground(new java.awt.Color(153, 0, 0));
+        panelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        panelPrincipal.setPreferredSize(new java.awt.Dimension(1500, 1120));
 
-        jLabel3.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel3.setText("Factura");
+        panelFactura.setBackground(new java.awt.Color(224, 239, 255));
 
-        jLabel4.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel4.setText("Factura");
-
-        jLabel6.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel6.setText("Factura");
-
-        jLabel7.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel7.setText("Factura");
-
-        jLabel8.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel8.setText("Factura");
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGap(213, 213, 213)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addContainerGap(249, Short.MAX_VALUE))
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3))
-        );
-
-        scrollPanelTabla.setBackground(new java.awt.Color(250, 249, 220));
-
-        panelDentroScrollTabla.setBackground(new java.awt.Color(251, 251, 232));
-
-        jTable1.setBackground(new java.awt.Color(249, 249, 242));
-        jTable1.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblFactura.setForeground(new java.awt.Color(153, 204, 255));
+        tblFactura.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -159,722 +131,582 @@ public class MenuBotonesComida extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblFactura);
 
-        botonGuardar.setBackground(new java.awt.Color(204, 0, 0));
-        botonGuardar.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
-        botonGuardar.setForeground(new java.awt.Color(255, 255, 255));
-        botonGuardar.setText("Guardar");
-        botonGuardar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jLabel11.setFont(new java.awt.Font("Ebrima", 1, 36)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(153, 204, 255));
+        jLabel11.setText("FACTURA");
 
-        botonCancelar.setBackground(new java.awt.Color(204, 0, 0));
-        botonCancelar.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
-        botonCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        botonCancelar.setText("Cancelar");
-        botonCancelar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCancelarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelDentroScrollTablaLayout = new javax.swing.GroupLayout(panelDentroScrollTabla);
-        panelDentroScrollTabla.setLayout(panelDentroScrollTablaLayout);
-        panelDentroScrollTablaLayout.setHorizontalGroup(
-            panelDentroScrollTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDentroScrollTablaLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(panelDentroScrollTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panelDentroScrollTablaLayout.createSequentialGroup()
-                        .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(77, 77, 77))
+        javax.swing.GroupLayout panelFacturaLayout = new javax.swing.GroupLayout(panelFactura);
+        panelFactura.setLayout(panelFacturaLayout);
+        panelFacturaLayout.setHorizontalGroup(
+            panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFacturaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFacturaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addGap(149, 149, 149))
         );
-        panelDentroScrollTablaLayout.setVerticalGroup(
-            panelDentroScrollTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDentroScrollTablaLayout.createSequentialGroup()
+        panelFacturaLayout.setVerticalGroup(
+            panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFacturaLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel11)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
-                .addGroup(panelDentroScrollTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
-        scrollPanelTabla.setViewportView(panelDentroScrollTabla);
+        pFCafe.setPreferredSize(new java.awt.Dimension(100, 130));
 
-        scrollPanel.setBackground(new java.awt.Color(255, 255, 255));
+        lblFCafe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/cafesimple.jpg"))); // NOI18N
 
-        panelDentroScroll.setBackground(new java.awt.Color(251, 251, 232));
-        panelDentroScroll.setMaximumSize(new java.awt.Dimension(32767, 1));
-
-        fotoCrema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/cremacafe.jpg"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(fotoCrema)
+        javax.swing.GroupLayout pFCafeLayout = new javax.swing.GroupLayout(pFCafe);
+        pFCafe.setLayout(pFCafeLayout);
+        pFCafeLayout.setHorizontalGroup(
+            pFCafeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pFCafeLayout.createSequentialGroup()
+                .addComponent(lblFCafe)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(fotoCrema)
+        pFCafeLayout.setVerticalGroup(
+            pFCafeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pFCafeLayout.createSequentialGroup()
+                .addComponent(lblFCafe)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        panelFCema.setPreferredSize(new java.awt.Dimension(100, 130));
+
+        lblFCrema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/cremacafe.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout panelFCemaLayout = new javax.swing.GroupLayout(panelFCema);
+        panelFCema.setLayout(panelFCemaLayout);
+        panelFCemaLayout.setHorizontalGroup(
+            panelFCemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFCemaLayout.createSequentialGroup()
+                .addComponent(lblFCrema)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        panelFCemaLayout.setVerticalGroup(
+            panelFCemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFCemaLayout.createSequentialGroup()
+                .addComponent(lblFCrema)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        panelFAzucar.setPreferredSize(new java.awt.Dimension(100, 130));
+
+        lblFAzucar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/azucarr.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout panelFAzucarLayout = new javax.swing.GroupLayout(panelFAzucar);
+        panelFAzucar.setLayout(panelFAzucarLayout);
+        panelFAzucarLayout.setHorizontalGroup(
+            panelFAzucarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFAzucarLayout.createSequentialGroup()
+                .addComponent(lblFAzucar)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        panelFAzucarLayout.setVerticalGroup(
+            panelFAzucarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFAzucarLayout.createSequentialGroup()
+                .addComponent(lblFAzucar)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        fotoEnsalada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/ensalada.jpg"))); // NOI18N
+        panelFEnsalada.setPreferredSize(new java.awt.Dimension(100, 130));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(fotoEnsalada)
+        lblFEnsalada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/ensalada.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout panelFEnsaladaLayout = new javax.swing.GroupLayout(panelFEnsalada);
+        panelFEnsalada.setLayout(panelFEnsaladaLayout);
+        panelFEnsaladaLayout.setHorizontalGroup(
+            panelFEnsaladaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFEnsaladaLayout.createSequentialGroup()
+                .addComponent(lblFEnsalada)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panelFEnsaladaLayout.setVerticalGroup(
+            panelFEnsaladaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFEnsaladaLayout.createSequentialGroup()
+                .addComponent(lblFEnsalada)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        panelFPizza.setPreferredSize(new java.awt.Dimension(100, 130));
+
+        lblFPizza.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/pizzaSimple.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout panelFPizzaLayout = new javax.swing.GroupLayout(panelFPizza);
+        panelFPizza.setLayout(panelFPizzaLayout);
+        panelFPizzaLayout.setHorizontalGroup(
+            panelFPizzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFPizzaLayout.createSequentialGroup()
+                .addComponent(lblFPizza)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panelFPizzaLayout.setVerticalGroup(
+            panelFPizzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFPizzaLayout.createSequentialGroup()
+                .addComponent(lblFPizza)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        panelFQueso.setPreferredSize(new java.awt.Dimension(100, 130));
+
+        lblFQueso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/queso.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout panelFQuesoLayout = new javax.swing.GroupLayout(panelFQueso);
+        panelFQueso.setLayout(panelFQuesoLayout);
+        panelFQuesoLayout.setHorizontalGroup(
+            panelFQuesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFQuesoLayout.createSequentialGroup()
+                .addComponent(lblFQueso)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panelFQuesoLayout.setVerticalGroup(
+            panelFQuesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFQuesoLayout.createSequentialGroup()
+                .addComponent(lblFQueso)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        paneleFVinagreta.setPreferredSize(new java.awt.Dimension(100, 130));
+
+        lblFVinagreta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/vinagreta.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout paneleFVinagretaLayout = new javax.swing.GroupLayout(paneleFVinagreta);
+        paneleFVinagreta.setLayout(paneleFVinagretaLayout);
+        paneleFVinagretaLayout.setHorizontalGroup(
+            paneleFVinagretaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneleFVinagretaLayout.createSequentialGroup()
+                .addComponent(lblFVinagreta)
                 .addGap(0, 2, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(fotoEnsalada)
+        paneleFVinagretaLayout.setVerticalGroup(
+            paneleFVinagretaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneleFVinagretaLayout.createSequentialGroup()
+                .addComponent(lblFVinagreta)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel6.setBackground(new java.awt.Color(251, 251, 232));
+        panelFPollo.setPreferredSize(new java.awt.Dimension(100, 130));
 
-        fotoAzucar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/azucarr.jpg"))); // NOI18N
+        lblFPollo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/pollo.jpg"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fotoAzucar)
+        javax.swing.GroupLayout panelFPolloLayout = new javax.swing.GroupLayout(panelFPollo);
+        panelFPollo.setLayout(panelFPolloLayout);
+        panelFPolloLayout.setHorizontalGroup(
+            panelFPolloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFPolloLayout.createSequentialGroup()
+                .addComponent(lblFPollo)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(fotoAzucar)
+        panelFPolloLayout.setVerticalGroup(
+            panelFPolloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFPolloLayout.createSequentialGroup()
+                .addComponent(lblFPollo)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        fotoTomate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/tomate.jpg"))); // NOI18N
+        panelFTomate.setPreferredSize(new java.awt.Dimension(100, 130));
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(fotoTomate)
+        lblFTomate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/tomate.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout panelFTomateLayout = new javax.swing.GroupLayout(panelFTomate);
+        panelFTomate.setLayout(panelFTomateLayout);
+        panelFTomateLayout.setHorizontalGroup(
+            panelFTomateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFTomateLayout.createSequentialGroup()
+                .addComponent(lblFTomate)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(fotoTomate)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        fotoSalami.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/salami.jpg"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fotoSalami)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(fotoSalami)
+        panelFTomateLayout.setVerticalGroup(
+            panelFTomateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFTomateLayout.createSequentialGroup()
+                .addComponent(lblFTomate)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        fotoVinagreta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/vinagreta.jpg"))); // NOI18N
+        panelFSalami.setPreferredSize(new java.awt.Dimension(100, 130));
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(fotoVinagreta))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(fotoVinagreta))
-        );
+        lblFSalami.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/salami.jpg"))); // NOI18N
 
-        fotoPepperoni.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/pepperoni.jpg"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(fotoPepperoni)
+        javax.swing.GroupLayout panelFSalamiLayout = new javax.swing.GroupLayout(panelFSalami);
+        panelFSalami.setLayout(panelFSalamiLayout);
+        panelFSalamiLayout.setHorizontalGroup(
+            panelFSalamiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFSalamiLayout.createSequentialGroup()
+                .addComponent(lblFSalami)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(fotoPepperoni)
+        panelFSalamiLayout.setVerticalGroup(
+            panelFSalamiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFSalamiLayout.createSequentialGroup()
+                .addComponent(lblFSalami)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        fotoEPollo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/pollo.jpg"))); // NOI18N
+        txtfCafe.setBackground(new java.awt.Color(153, 204, 255));
+        txtfCafe.setText("$");
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(fotoEPollo)
-                .addGap(0, 2, Short.MAX_VALUE))
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(fotoEPollo)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        txtfEnsalada.setBackground(new java.awt.Color(153, 204, 255));
+        txtfEnsalada.setText("$");
 
-        fotoQueso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/queso.jpg"))); // NOI18N
+        tctfEnsalada.setBackground(new java.awt.Color(153, 204, 255));
+        tctfEnsalada.setText("$");
+        tctfEnsalada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tctfEnsaladaActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(fotoQueso))
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(fotoQueso))
-        );
+        txtfCream.setBackground(new java.awt.Color(224, 239, 255));
+        txtfCream.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
+        txtfCream.setText("$");
 
-        botonCafeSimple.setBackground(new java.awt.Color(204, 0, 0));
-        botonCafeSimple.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        botonCafeSimple.setForeground(new java.awt.Color(255, 255, 255));
-        botonCafeSimple.setText("Café Simple");
-        botonCafeSimple.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        botonCafeSimple.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        botonCafeSimple.setIconTextGap(3);
-        botonCafeSimple.setMaximumSize(new java.awt.Dimension(214, 185));
-        botonCafeSimple.setMinimumSize(new java.awt.Dimension(214, 185));
-        botonCafeSimple.setPreferredSize(new java.awt.Dimension(214, 185));
+        txtfAzucar.setBackground(new java.awt.Color(153, 204, 255));
+        txtfAzucar.setText("$");
+        txtfAzucar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfAzucarActionPerformed(evt);
+            }
+        });
 
-        botonCrema.setBackground(new java.awt.Color(204, 0, 0));
-        botonCrema.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        botonCrema.setForeground(new java.awt.Color(255, 255, 255));
-        botonCrema.setText("Crema");
-        botonCrema.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        txtfVinagreta.setBackground(new java.awt.Color(224, 239, 255));
+        txtfVinagreta.setText("$");
 
-        botonAzucar.setBackground(new java.awt.Color(204, 0, 0));
+        txtfPollo.setBackground(new java.awt.Color(153, 204, 255));
+        txtfPollo.setText("$");
+
+        txtfTomate.setBackground(new java.awt.Color(224, 239, 255));
+        txtfTomate.setText("$");
+
+        txtfSalami.setBackground(new java.awt.Color(224, 239, 255));
+        txtfSalami.setText("$");
+
+        txtfPepperoni.setBackground(new java.awt.Color(153, 204, 255));
+        txtfPepperoni.setText("$");
+        txtfPepperoni.setPreferredSize(new java.awt.Dimension(64, 22));
+
+        txtfQueso.setBackground(new java.awt.Color(224, 239, 255));
+        txtfQueso.setText("$");
+        txtfQueso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfQuesoActionPerformed(evt);
+            }
+        });
+
+        botonTomate.setBackground(new java.awt.Color(255, 255, 204));
+        botonTomate.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        botonTomate.setText("+    Tomate");
+
+        botonPollo.setBackground(new java.awt.Color(255, 255, 204));
+        botonPollo.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        botonPollo.setText("+    Pollo");
+
+        botonVinagreta.setBackground(new java.awt.Color(255, 255, 204));
+        botonVinagreta.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        botonVinagreta.setText("+  Vinagreta");
+
+        botonEnsalada.setBackground(new java.awt.Color(255, 255, 204));
+        botonEnsalada.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        botonEnsalada.setText("+    Ensalada");
+
+        botonAzucar.setBackground(new java.awt.Color(255, 255, 204));
         botonAzucar.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        botonAzucar.setForeground(new java.awt.Color(255, 255, 255));
-        botonAzucar.setText("Azúcar");
-        botonAzucar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        botonAzucar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        botonAzucar.setMaximumSize(new java.awt.Dimension(214, 185));
-        botonAzucar.setMinimumSize(new java.awt.Dimension(214, 185));
-
-        botonPizza.setBackground(new java.awt.Color(204, 0, 0));
-        botonPizza.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        botonPizza.setForeground(new java.awt.Color(255, 255, 255));
-        botonPizza.setText("Pizza Sencilla");
-        botonPizza.setToolTipText("");
-        botonPizza.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        botonPizza.addActionListener(new java.awt.event.ActionListener() {
+        botonAzucar.setText("+    Azucar");
+        botonAzucar.setToolTipText("");
+        botonAzucar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonPizzaActionPerformed(evt);
+                botonAzucarActionPerformed(evt);
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(204, 0, 0));
-        jButton7.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Ensalada Sencilla");
-        jButton7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jButton7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
+        botonCrema.setBackground(new java.awt.Color(255, 255, 204));
+        botonCrema.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        botonCrema.setText("+    Crema");
 
-        botonQueso.setBackground(new java.awt.Color(204, 0, 0));
-        botonQueso.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        botonQueso.setForeground(new java.awt.Color(255, 255, 255));
-        botonQueso.setText("Queso");
-        botonQueso.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        botonQueso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonQuesoActionPerformed(evt);
-            }
-        });
+        botonCafe.setBackground(new java.awt.Color(255, 255, 204));
+        botonCafe.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        botonCafe.setText("+    Cafe");
 
-        botonPepperoni.setBackground(new java.awt.Color(204, 0, 0));
-        botonPepperoni.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        botonPepperoni.setForeground(new java.awt.Color(255, 255, 255));
-        botonPepperoni.setText("Pepperoni");
-        botonPepperoni.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        botonPepperoni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonPepperoniActionPerformed(evt);
-            }
-        });
-
-        botonSalami.setBackground(new java.awt.Color(204, 0, 0));
+        botonSalami.setBackground(new java.awt.Color(255, 255, 204));
         botonSalami.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        botonSalami.setForeground(new java.awt.Color(255, 255, 255));
-        botonSalami.setText(" Salami");
-        botonSalami.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        botonSalami.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSalamiActionPerformed(evt);
-            }
-        });
+        botonSalami.setText("+    Salami");
 
-        panelTitulo.setBackground(new java.awt.Color(153, 0, 0));
-        panelTitulo.setToolTipText("");
+        botonPepperoni.setBackground(new java.awt.Color(255, 255, 204));
+        botonPepperoni.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        botonPepperoni.setText("+  Pepperoni");
+        botonPepperoni.setPreferredSize(new java.awt.Dimension(91, 23));
 
-        jLabel1.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Selector de comida");
+        botonQueso.setBackground(new java.awt.Color(255, 255, 204));
+        botonQueso.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        botonQueso.setText("+    Queso");
 
-        javax.swing.GroupLayout panelTituloLayout = new javax.swing.GroupLayout(panelTitulo);
-        panelTitulo.setLayout(panelTituloLayout);
-        panelTituloLayout.setHorizontalGroup(
-            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTituloLayout.createSequentialGroup()
-                .addGap(188, 188, 188)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
+        botonPizza.setBackground(new java.awt.Color(255, 255, 204));
+        botonPizza.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        botonPizza.setText("+    Pizza");
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/pepperoni.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout panelFPeperoniLayout = new javax.swing.GroupLayout(panelFPeperoni);
+        panelFPeperoni.setLayout(panelFPeperoniLayout);
+        panelFPeperoniLayout.setHorizontalGroup(
+            panelFPeperoniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFPeperoniLayout.createSequentialGroup()
+                .addComponent(jLabel7)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panelFPeperoniLayout.setVerticalGroup(
+            panelFPeperoniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFPeperoniLayout.createSequentialGroup()
+                .addComponent(jLabel7)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        panelBanner.setBackground(new java.awt.Color(153, 204, 255));
+        panelBanner.setPreferredSize(new java.awt.Dimension(1043, 50));
+
+        jLabel1.setFont(new java.awt.Font("Ebrima", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 204));
+        jLabel1.setText("MENU");
+
+        javax.swing.GroupLayout panelBannerLayout = new javax.swing.GroupLayout(panelBanner);
+        panelBanner.setLayout(panelBannerLayout);
+        panelBannerLayout.setHorizontalGroup(
+            panelBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBannerLayout.createSequentialGroup()
+                .addGap(682, 682, 682)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        panelTituloLayout.setVerticalGroup(
-            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        panelBannerLayout.setVerticalGroup(
+            panelBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBannerLayout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
-        jButton9.setBackground(new java.awt.Color(204, 0, 0));
-        jButton9.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(255, 255, 255));
-        jButton9.setText("Pollo");
-        jButton9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jButton2.setBackground(new java.awt.Color(204, 0, 0));
-        jButton2.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Tomate");
-        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton8.setBackground(new java.awt.Color(204, 0, 0));
-        jButton8.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("Vinagreta");
-        jButton8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-
-        jTextField1.setBackground(new java.awt.Color(153, 0, 0));
-        jTextField1.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setText("$");
-
-        jTextField2.setBackground(new java.awt.Color(153, 0, 0));
-        jTextField2.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField2.setText("$");
-
-        jTextField3.setBackground(new java.awt.Color(153, 0, 0));
-        jTextField3.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField3.setText("$");
-
-        jTextField4.setBackground(new java.awt.Color(153, 0, 0));
-        jTextField4.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField4.setText("$");
-
-        jTextField5.setBackground(new java.awt.Color(153, 0, 0));
-        jTextField5.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField5.setText("$");
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
-            }
-        });
-
-        jTextField7.setBackground(new java.awt.Color(153, 0, 0));
-        jTextField7.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField7.setText("$");
-
-        jTextField8.setBackground(new java.awt.Color(153, 0, 0));
-        jTextField8.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jTextField8.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField8.setText("$");
-
-        jTextField9.setBackground(new java.awt.Color(153, 0, 0));
-        jTextField9.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jTextField9.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField9.setText("$");
-
-        jTextField10.setBackground(new java.awt.Color(153, 0, 0));
-        jTextField10.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jTextField10.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField10.setText("$");
-
-        jTextField11.setBackground(new java.awt.Color(153, 0, 0));
-        jTextField11.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jTextField11.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField11.setText("$");
-
-        jTextField12.setBackground(new java.awt.Color(153, 0, 0));
-        jTextField12.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jTextField12.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField12.setText("$");
-
-        fotoCafe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/cafesimple.jpg"))); // NOI18N
-
-        fotoPizza.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/pizzaSimple.jpg"))); // NOI18N
-
-        javax.swing.GroupLayout panelDentroScrollLayout = new javax.swing.GroupLayout(panelDentroScroll);
-        panelDentroScroll.setLayout(panelDentroScrollLayout);
-        panelDentroScrollLayout.setHorizontalGroup(
-            panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(panelDentroScrollLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelDentroScrollLayout.createSequentialGroup()
-                        .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonPizza, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fotoPizza)
-                            .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField11, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
-                        .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelDentroScrollLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelDentroScrollLayout.createSequentialGroup()
-                                .addGap(162, 162, 162)
-                                .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(botonQueso, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(botonCrema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGap(65, 65, 65)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelDentroScrollLayout.createSequentialGroup()
-                        .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(botonCafeSimple, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField1))
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fotoCafe))
-                        .addGap(0, 445, Short.MAX_VALUE)))
-                .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDentroScrollLayout.createSequentialGroup()
-                        .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField12, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(botonSalami, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField9, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
-                        .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7)
-                            .addComponent(jTextField8)
-                            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonPepperoni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(157, 157, 157))
-                    .addGroup(panelDentroScrollLayout.createSequentialGroup()
-                        .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonAzucar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
+        panelPrincipal.setLayout(panelPrincipalLayout);
+        panelPrincipalLayout.setHorizontalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(panelFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(88, 88, 88)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pFCafe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelFPizza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelFEnsalada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtfCafe)
+                    .addComponent(txtfEnsalada)
+                    .addComponent(tctfEnsalada)
+                    .addComponent(botonCafe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonEnsalada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonPizza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(126, 126, 126)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(paneleFVinagreta, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                            .addComponent(txtfVinagreta)
+                            .addComponent(botonVinagreta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botonCrema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtfCream))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(panelFPollo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtfPollo)
+                            .addComponent(botonPollo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botonAzucar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtfAzucar, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addComponent(panelFCema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelFAzucar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(panelFQueso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtfQueso)
+                            .addComponent(botonQueso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(117, 117, 117)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botonPepperoni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtfPepperoni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                                .addGap(0, 2, Short.MAX_VALUE)
+                                .addComponent(panelFPeperoni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(117, 117, 117)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelFTomate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelFSalami, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtfTomate)
+                    .addComponent(txtfSalami, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botonTomate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonSalami, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
+            .addComponent(panelBanner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1500, Short.MAX_VALUE)
         );
-        panelDentroScrollLayout.setVerticalGroup(
-            panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDentroScrollLayout.createSequentialGroup()
-                .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelDentroScrollLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(fotoCafe)
-                        .addGap(18, 18, 18)
-                        .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonCafeSimple, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonAzucar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(536, 536, 536))
-                    .addGroup(panelDentroScrollLayout.createSequentialGroup()
-                        .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelDentroScrollLayout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDentroScrollLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(16, 16, 16)
-                                .addComponent(botonCrema, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(52, 52, 52)
-                        .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(fotoPizza))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botonPizza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonQueso)
-                            .addComponent(botonPepperoni)
-                            .addComponent(botonSalami))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(123, 123, 123)
-                        .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(15, 15, 15)
-                        .addGroup(panelDentroScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(72, 72, 72))))
-        );
-
-        scrollPanel.setViewportView(panelDentroScroll);
-
-        javax.swing.GroupLayout panelTablaLayout = new javax.swing.GroupLayout(panelTabla);
-        panelTabla.setLayout(panelTablaLayout);
-        panelTablaLayout.setHorizontalGroup(
-            panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTablaLayout.createSequentialGroup()
-                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelTablaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(scrollPanelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 995, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelTablaLayout.setVerticalGroup(
-            panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTablaLayout.createSequentialGroup()
-                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelTablaLayout.createSequentialGroup()
-                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+        panelPrincipalLayout.setVerticalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                .addComponent(panelBanner, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelFactura, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelFTomate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                                .addComponent(panelFAzucar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtfAzucar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botonAzucar)
+                                .addGap(18, 18, 18)
+                                .addComponent(panelFPollo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                                .addComponent(pFCafe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtfCafe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botonCafe)
+                                .addGap(18, 18, 18)
+                                .addComponent(panelFEnsalada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                                .addComponent(panelFCema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtfCream, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botonCrema)
+                                .addGap(18, 18, 18)
+                                .addComponent(paneleFVinagreta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrollPanelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 898, Short.MAX_VALUE))
-                    .addComponent(scrollPanel))
-                .addContainerGap())
-        );
-
-        panelBotones.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout panelBotonesLayout = new javax.swing.GroupLayout(panelBotones);
-        panelBotones.setLayout(panelBotonesLayout);
-        panelBotonesLayout.setHorizontalGroup(
-            panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 8, Short.MAX_VALUE)
-        );
-        panelBotonesLayout.setVerticalGroup(
-            panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtfTomate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfEnsalada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfVinagreta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfPollo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(botonTomate)
+                            .addComponent(botonPollo)
+                            .addComponent(botonVinagreta)
+                            .addComponent(botonEnsalada))
+                        .addGap(31, 31, 31)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelFQueso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panelFPizza, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panelFPeperoni, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panelFSalami, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tctfEnsalada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfQueso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfPepperoni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfSalami, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(botonSalami)
+                            .addComponent(botonPepperoni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonQueso)
+                            .addComponent(botonPizza))))
+                .addGap(1170, 1170, 1170))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelTabla, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 1170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonAzucarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAzucarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonAzucarActionPerformed
 
-    private void botonSalamiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalamiActionPerformed
+    private void txtfAzucarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfAzucarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botonSalamiActionPerformed
+    }//GEN-LAST:event_txtfAzucarActionPerformed
 
-    private void botonPepperoniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPepperoniActionPerformed
+    private void tctfEnsaladaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tctfEnsaladaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botonPepperoniActionPerformed
+    }//GEN-LAST:event_tctfEnsaladaActionPerformed
 
-    private void botonQuesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonQuesoActionPerformed
+    private void txtfQuesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfQuesoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botonQuesoActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void botonPizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPizzaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonPizzaActionPerformed
-
-    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonCancelarActionPerformed
-
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_txtfQuesoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAzucar;
-    private javax.swing.JButton botonCafeSimple;
-    private javax.swing.JButton botonCancelar;
+    private javax.swing.JButton botonCafe;
     private javax.swing.JButton botonCrema;
-    private javax.swing.JButton botonGuardar;
+    private javax.swing.JButton botonEnsalada;
     private javax.swing.JButton botonPepperoni;
     private javax.swing.JButton botonPizza;
+    private javax.swing.JButton botonPollo;
     private javax.swing.JButton botonQueso;
     private javax.swing.JButton botonSalami;
-    private javax.swing.JLabel fotoAzucar;
-    private javax.swing.JLabel fotoCafe;
-    private javax.swing.JLabel fotoCrema;
-    private javax.swing.JLabel fotoEPollo;
-    private javax.swing.JLabel fotoEnsalada;
-    private javax.swing.JLabel fotoPepperoni;
-    private javax.swing.JLabel fotoPizza;
-    private javax.swing.JLabel fotoQueso;
-    private javax.swing.JLabel fotoSalami;
-    private javax.swing.JLabel fotoTomate;
-    private javax.swing.JLabel fotoVinagreta;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton botonTomate;
+    private javax.swing.JButton botonVinagreta;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
-    private javax.swing.JPanel panelBotones;
-    private javax.swing.JPanel panelDentroScroll;
-    private javax.swing.JPanel panelDentroScrollTabla;
-    private javax.swing.JPanel panelTabla;
-    private javax.swing.JPanel panelTitulo;
-    private javax.swing.JScrollPane scrollPanel;
-    private javax.swing.JScrollPane scrollPanelTabla;
+    private javax.swing.JLabel lblFAzucar;
+    private javax.swing.JLabel lblFCafe;
+    private javax.swing.JLabel lblFCrema;
+    private javax.swing.JLabel lblFEnsalada;
+    private javax.swing.JLabel lblFPizza;
+    private javax.swing.JLabel lblFPollo;
+    private javax.swing.JLabel lblFQueso;
+    private javax.swing.JLabel lblFSalami;
+    private javax.swing.JLabel lblFTomate;
+    private javax.swing.JLabel lblFVinagreta;
+    private javax.swing.JPanel pFCafe;
+    private javax.swing.JPanel panelBanner;
+    private javax.swing.JPanel panelFAzucar;
+    private javax.swing.JPanel panelFCema;
+    private javax.swing.JPanel panelFEnsalada;
+    private javax.swing.JPanel panelFPeperoni;
+    private javax.swing.JPanel panelFPizza;
+    private javax.swing.JPanel panelFPollo;
+    private javax.swing.JPanel panelFQueso;
+    private javax.swing.JPanel panelFSalami;
+    private javax.swing.JPanel panelFTomate;
+    private javax.swing.JPanel panelFactura;
+    private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel paneleFVinagreta;
+    private javax.swing.JTable tblFactura;
+    private javax.swing.JTextField tctfEnsalada;
+    private javax.swing.JTextField txtfAzucar;
+    private javax.swing.JTextField txtfCafe;
+    private javax.swing.JTextField txtfCream;
+    private javax.swing.JTextField txtfEnsalada;
+    private javax.swing.JTextField txtfPepperoni;
+    private javax.swing.JTextField txtfPollo;
+    private javax.swing.JTextField txtfQueso;
+    private javax.swing.JTextField txtfSalami;
+    private javax.swing.JTextField txtfTomate;
+    private javax.swing.JTextField txtfVinagreta;
     // End of variables declaration//GEN-END:variables
+
+
+
 }
