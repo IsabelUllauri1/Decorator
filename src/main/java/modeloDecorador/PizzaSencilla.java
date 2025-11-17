@@ -1,10 +1,10 @@
-package decorador.modelo;
+package modeloDecorador;
 
 /**
  *
  * @author isaul
  */
-public abstract class Pizza implements Comida{
+public class PizzaSencilla implements Comida{
     double costo;
     String descripcion;
 

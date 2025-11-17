@@ -1,6 +1,6 @@
 package decorador;
 
-import decorador.view.MenuBotonesComida;
+import view.MenuBotonesComida;
 import javax.swing.UIManager;
 
 /**

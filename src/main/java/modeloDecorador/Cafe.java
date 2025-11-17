@@ -1,11 +1,11 @@
 
-package decorador.modelo;
+package modeloDecorador;
 
 /**
  *
  * @author isaul
  */
-public class Cafe implements Bebida{
+public class Cafe implements Comida{
     //variable global
     //las variables son publicas solo en la calse base
     double costo;
@@ -15,7 +15,7 @@ public class Cafe implements Bebida{
     //tambien se puede usar un SET
 
     public Cafe() {
-        costo = 1.25;
+        costo = 2.20;
         descripcion = "Cafe";
     }
     

@@ -2,29 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package decorador.modelo;
+package modeloDecorador;
 
 /**
  *
  * @author isaul
  */
-public class DecAzucar extends DecoradorBebida{
+public class DecAzucar extends DecComida{
     
-    public DecAzucar(Bebida bebida) {
-        super(bebida);
+    public DecAzucar(Comida comida) {
+        super(comida);
     }
 
     @Override
     public double getCosto() {
-        double costo = super.getCosto()+1.0;
-        return costo;
-
+        
+        return comida.getCosto()+0.50;
     }
 
     @Override
     public String getDescripcion() {
-        String descripcion = super.getDescripcion()+ ", Azucar"; 
-        return descripcion;
+        return comida.getDescripcion()+ ", Azucar"; 
     }
     
     

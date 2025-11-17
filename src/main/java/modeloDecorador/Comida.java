@@ -1,10 +1,11 @@
-package decorador.modelo;
+
+package modeloDecorador;
 
 /**
  *
  * @author isaul
  */
-public interface Bebida {
+public interface Comida {
     String getDescripcion();
     double getCosto();
     

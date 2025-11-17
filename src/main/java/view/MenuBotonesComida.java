@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
-package decorador.view;
+
+package view;
 
 /**
  *
@@ -17,7 +14,7 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
         initComponents(); //se crea panelPrincipal con su GroupLayout 
 
         // panel con fondo
-        decorador.view.FotoFondo fondo = new decorador.view.FotoFondo("/decorador/paper2.jpg");
+        view.FotoFondo fondo = new view.FotoFondo("/decorador/paper2.jpg");
         fondo.setLayout(new java.awt.BorderLayout());
 
         //quitar panelPrincipal del contentPane actual
@@ -111,8 +108,6 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
         jLabel7 = new javax.swing.JLabel();
         panelBanner = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-
-        setPreferredSize(new java.awt.Dimension(1500, 800));
 
         panelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         panelPrincipal.setPreferredSize(new java.awt.Dimension(1500, 1120));
@@ -390,7 +385,6 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
 
         txtfPepperoni.setBackground(new java.awt.Color(153, 204, 255));
         txtfPepperoni.setText("$");
-        txtfPepperoni.setPreferredSize(new java.awt.Dimension(64, 22));
 
         txtfQueso.setBackground(new java.awt.Color(224, 239, 255));
         txtfQueso.setText("$");
@@ -537,7 +531,7 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
                         .addGap(117, 117, 117)
                         .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(botonPepperoni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtfPepperoni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtfPepperoni)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
                                 .addGap(0, 2, Short.MAX_VALUE)
                                 .addComponent(panelFPeperoni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -619,8 +613,8 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
                 .addGap(1170, 1170, 1170))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelPrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -666,8 +660,6 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFAzucar;
     private javax.swing.JLabel lblFCafe;
