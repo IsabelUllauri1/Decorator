@@ -16,7 +16,6 @@ public class FotoFondo extends JPanel {
         }
         if (url != null) {
             imagenFondo = new ImageIcon(url).getImage();
-            System.out.println("Cargado: " + url);
         } else {
             System.err.println("No se encontró la imagen: " + ruta);
         }
