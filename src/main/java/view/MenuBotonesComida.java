@@ -49,7 +49,7 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
      * Creates new form MenuBotonesComida
      */
     public MenuBotonesComida() {
-        initComponents(); //se crea panelPrincipal con su GroupLayout 
+        initComponents(); 
 
         // panel con fondo
         view.FotoFondo fondo = new view.FotoFondo("/decorador/paper2.jpg");
@@ -71,69 +71,93 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);
+        
+        //tabla factura
         configurarTablaFactura();
 
     }
     
     private void configurarTablaFactura() {
+        //crea el modelo de la tabla con las 4 columnas
         modeloFactura = new DefaultTableModel(
                 new Object[]{"Producto", "Adicional", "Precio", "Subtotal"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false; // no se edita a mano
+                return false; //no se puede editar la tabla con el teclado
             }
         };
+        //asigna el modelo a la tabla de la vista
         tblFactura.setModel(modeloFactura);
+        //agrega al final la fila de total
         agregarFilaTotal();
     }
 
     private void agregarFilaTotal() {
+        //anade una fila con el texto total y el valor 0 formateado
         modeloFactura.addRow(new Object[]{"TOTAL:", "", "", formatear(0)});
     }
 
     private void actualizarTotal() {
+        //acumula el total de todos los subtotales
         double total = 0.0;
+        //obtiene cuántas filas hay en la tabla
         int filas = modeloFactura.getRowCount();
-        for (int i = 0; i < filas - 1; i++) { // todas menos la última (TOTAL)
-            Object val = modeloFactura.getValueAt(i, 3); // Subtotal
+        //recorre todas las filas menos la ultima (TOTAL)
+        for (int i = 0; i < filas - 1; i++) { //todas menos la ultima (TOTAL)
+            //toma el valor de la columna subtotal de esa fila
+            Object val = modeloFactura.getValueAt(i, 3); //subtotal
             if (val != null) {
+                //convierte el texto quitando el signo $
                 String txt = val.toString().replace("$", "").trim();
                 if (!txt.isEmpty()) {
                     try {
+                        //suma el número al total
                         total += Double.parseDouble(txt.replace(",", "."));
                     } catch (NumberFormatException ex) {
-                        // ignora si esta algo raro
+                        //ignora si el texto no se puede convertir a número
                     }
                 }
             }
         }
+        //escribe el total calculado en la ultima fila, columna subtotal
         modeloFactura.setValueAt(formatear(total), filas - 1, 3);
     }
 
     private void seleccionarCafe() {
+        //crea un nuevo objeto cafe como comida actual
         comidaActual = new Cafe();
+        //marca que el tipo  actual es cafe
         tipoPlatoActual = TipoPlato.CAFE;
 
-        int filaTotal = modeloFactura.getRowCount() - 1; // última es TOTAL
+        //obtiene la posición de la fila total
+        int filaTotal = modeloFactura.getRowCount() - 1; //última es TOTAL
+        //la nueva fila del producto ira antes de la de total
         filaProductoActual = filaTotal;
 
+        //inserta la fila del cafe en la factura
         modeloFactura.insertRow(filaProductoActual, new Object[]{
-            "café", // Producto
-            "", // Adicional
-            formatear(comidaActual.getCosto()), // Precio (base)
-            formatear(comidaActual.getCosto()) // Subtotal (por ahora solo base)
+            "café", //producto
+            "", //adicional vacio
+            formatear(comidaActual.getCosto()), //precio base del cafe
+            formatear(comidaActual.getCosto()) //subtotal igual al precio base
         });
 
+        //actualiza el total general
         actualizarTotal();
     }
 
     private void seleccionarEnsalada() {
+        //crea una nueva ensalada como comida actual
         comidaActual = new EnsaladaSencilla();
+        //marca que el tipo actual es ensalada
         tipoPlatoActual = TipoPlato.ENSALADA;
 
+        //posicion de la fila total
         int filaTotal = modeloFactura.getRowCount() - 1;
+        //fila donde se guarda este producto
         filaProductoActual = filaTotal;
 
+        //inserta la fila de la ensalada en la factura
         modeloFactura.insertRow(filaProductoActual, new Object[]{
             "ensalada sencilla",
             "",
@@ -141,16 +165,22 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
             formatear(comidaActual.getCosto())
         });
 
+        //actualiza el total general
         actualizarTotal();
     }
 
     private void seleccionarPizza() {
+        //crea una nueva pizza como comida actual
         comidaActual = new PizzaSencilla();
+        //marca que el tipo actual es pizza
         tipoPlatoActual = TipoPlato.PIZZA;
 
+        //posicion de la fila total
         int filaTotal = modeloFactura.getRowCount() - 1;
+        //fila donde se guarda esta pizza
         filaProductoActual = filaTotal;
 
+        //inserta la fila de la pizza en factura
         modeloFactura.insertRow(filaProductoActual, new Object[]{
             "pizza sencilla",
             "",
@@ -158,24 +188,13 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
             formatear(comidaActual.getCosto())
         });
 
+        //actualiza el total general
         actualizarTotal();
     }
 
-
-   //FOTO FONDO
-    private void hacerTransparentes(java.awt.Container c) {
-        for (java.awt.Component comp : c.getComponents()) {
-            if (comp instanceof javax.swing.JPanel) {
-                ((javax.swing.JPanel) comp).setOpaque(false);
-            }
-            if (comp instanceof java.awt.Container) {
-                hacerTransparentes((java.awt.Container) comp);
-            }
-        }
-    }
-    
     //validador
     private boolean validarAdicional(TipoPlato esperado) {
+        //si no hay comida o el tipo no coincide o no hay fila: error
         if (comidaActual == null || tipoPlatoActual != esperado || filaProductoActual < 0) {
             JOptionPane.showMessageDialog(this,
                     "NO puede seleccionar la opción adicional",
@@ -183,37 +202,43 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
                     JOptionPane.WARNING_MESSAGE);
             return false;
         }
+        //si todo bien, true
         return true;
     }
-    
+
     //agregar adicional
     private void agregarAdicional(DecComida decorador, String nombreAdicional) {
+        //guarda el costo antes de aplicar el decorador
         double costoAntes = comidaActual.getCosto();
-        comidaActual = decorador; // encadenamos el decorador
+        //aplica el decorador a la comida actual
+        comidaActual = decorador; //encadena el decorador
+        //obtiene el nuevo costo con el adicional
         double costoDespues = comidaActual.getCosto();
+        //calcula cuanto cuesta solo el adicional
         double costoExtra = costoDespues - costoAntes;
 
-        // fila adicional ANTES del TOTAL
+        //fila donde se pone el adicional (antes del total)
         int filaTotal = modeloFactura.getRowCount() - 1;
-        modeloFactura.insertRow(filaTotal, new Object[]{
-            "", // producto vacío
-            nombreAdicional, // adicional
-            formatear(costoExtra), // precio del adicional
-            "" // subtotal solo en la fila del producto base
+        //inserta una nueva fila solo con el adicional
+        modeloFactura.insertRow(filaTotal, new Object[]{"",nombreAdicional,formatear(costoExtra), //producto vacio +nombre adicional+precio adicional+
+            "" //subtotal solo en la fila del producto base
         });
 
-        // actualizar subtotal del producto base actual
+        //actualiza el subtotal en la fila del producto base
         modeloFactura.setValueAt(formatear(costoDespues), filaProductoActual, 3);
 
+        //vuelve a calcular el total general
         actualizarTotal();
     }
-    
-    //,etodos para botones de adicionales
+
+    //metodos para botones de adicionales
     private void accionAzucar() {
+        //verifica que el adicional corresponda a un cafe
         if (!validarAdicional(TipoPlato.CAFE)) {
             return;
         }
-        agregarAdicional(new DecAzucar(comidaActual), "azúcar");
+        //agrega el decorador azúcar a la comida actual
+        agregarAdicional(new DecAzucar(comidaActual), "azucar");
     }
 
     private void accionCrema() {
@@ -263,6 +288,18 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
             return;
         }
         agregarAdicional(new DecPepperoni(comidaActual), "pepperoni");
+    }
+    
+    //FOTO FONDO
+    private void hacerTransparentes(java.awt.Container c) {
+        for (java.awt.Component comp : c.getComponents()) {
+            if (comp instanceof javax.swing.JPanel) {
+                ((javax.swing.JPanel) comp).setOpaque(false);
+            }
+            if (comp instanceof java.awt.Container) {
+                hacerTransparentes((java.awt.Container) comp);
+            }
+        }
     }
 
 
