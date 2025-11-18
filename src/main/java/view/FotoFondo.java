@@ -21,7 +21,7 @@ public class FotoFondo extends JPanel {
             System.err.println("No se encontró la imagen: " + ruta);
         }
         setDoubleBuffered(true);
-        setOpaque(true); // este panel sí pinta
+        setOpaque(true); // este panel SI pinta
     }
 
     @Override
