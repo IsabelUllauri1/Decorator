@@ -100,26 +100,26 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
     private void actualizarTotal() {
         //acumula el total de todos los subtotales
         double total = 0.0;
-        //obtiene cuántas filas hay en la tabla
+        //obtiene cuantas filas hay en la tabla
         int filas = modeloFactura.getRowCount();
-        //recorre todas las filas menos la ultima (TOTAL)
-        for (int i = 0; i < filas - 1; i++) { //todas menos la ultima (TOTAL)
+        //recorre todas las filas menos la ultima de TOTAL
+        for (int i = 0; i < filas - 1; i++) { //todas menos la ultima TOTAL
             //toma el valor de la columna subtotal de esa fila
             Object val = modeloFactura.getValueAt(i, 3); //subtotal
             if (val != null) {
-                //convierte el texto quitando el signo $
+                //convierte el texto quitando el $
                 String txt = val.toString().replace("$", "").trim();
                 if (!txt.isEmpty()) {
                     try {
                         //suma el número al total
                         total += Double.parseDouble(txt.replace(",", "."));
                     } catch (NumberFormatException ex) {
-                        //ignora si el texto no se puede convertir a número
+                        //ignora si el texto no se puede convertir a numero
                     }
                 }
             }
         }
-        //escribe el total calculado en la ultima fila, columna subtotal
+        //escribe el total calculado en la ultima fila
         modeloFactura.setValueAt(formatear(total), filas - 1, 3);
     }
 
@@ -130,7 +130,7 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
         tipoPlatoActual = TipoPlato.CAFE;
 
         //obtiene la posición de la fila total
-        int filaTotal = modeloFactura.getRowCount() - 1; //última es TOTAL
+        int filaTotal = modeloFactura.getRowCount() - 1; //ultima es TOTAL
         //la nueva fila del producto ira antes de la de total
         filaProductoActual = filaTotal;
 
