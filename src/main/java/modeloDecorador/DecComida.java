@@ -10,7 +10,7 @@ package modeloDecorador;
  */
 public abstract class DecComida implements Comida {
     
-    protected Comida comida;
+    Comida comida;
 
     public DecComida(Comida comida) {
         this.comida = comida;
