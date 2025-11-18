@@ -214,7 +214,7 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblSubTFactura" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -223,7 +223,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblSubTFactura" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="140" max="32767" attributes="0"/>
@@ -241,6 +241,9 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="tblFactura">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Ebrima" size="12" style="1"/>
+                    </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="cc" red="99" type="rgb"/>
                     </Property>
@@ -256,7 +259,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="jLabel11">
+            <Component class="javax.swing.JLabel" name="lblSubTFactura">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Ebrima" size="36" style="1"/>
@@ -729,6 +732,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="+    Tomate"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonTomateActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botonPollo">
           <Properties>
@@ -740,6 +746,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="+    Pollo"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonPolloActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botonVinagreta">
           <Properties>
@@ -751,6 +760,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="+  Vinagreta"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonVinagretaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botonEnsalada">
           <Properties>
@@ -762,6 +774,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="+    Ensalada"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEnsaladaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botonAzucar">
           <Properties>
@@ -788,6 +803,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="+    Crema"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonCremaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botonCafe">
           <Properties>
@@ -799,6 +817,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="+    Cafe"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonCafeActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botonSalami">
           <Properties>
@@ -810,6 +831,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="+    Salami"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonSalamiActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botonPepperoni">
           <Properties>
@@ -824,6 +848,9 @@
               <Dimension value="[91, 23]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonPepperoniActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botonQueso">
           <Properties>
@@ -835,6 +862,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="+    Queso"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonQuesoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botonPizza">
           <Properties>
@@ -846,6 +876,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="+    Pizza"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonPizzaActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="panelFPeperoni">
 
@@ -853,7 +886,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblFPepperoni" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -861,14 +894,14 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblFPepperoni" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel7">
+            <Component class="javax.swing.JLabel" name="lblFPepperoni">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/decorador/pepperoni.jpg"/>
@@ -892,7 +925,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="682" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTituloMenu" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -900,14 +933,14 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTituloMenu" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="lblTituloMenu">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Ebrima" size="36" style="1"/>

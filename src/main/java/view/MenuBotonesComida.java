@@ -1,11 +1,49 @@
 
 package view;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import modeloDecorador.Comida;
+import modeloDecorador.Cafe;
+import modeloDecorador.EnsaladaSencilla;
+import modeloDecorador.PizzaSencilla;
+import modeloDecorador.DecAzucar;
+import modeloDecorador.DecCrema;
+import modeloDecorador.DecTomate;
+import modeloDecorador.DecVinagreta;
+import modeloDecorador.DecPollo;
+import modeloDecorador.DecQueso;
+import modeloDecorador.DecSalami;
+import modeloDecorador.DecPepperoni;
+import modeloDecorador.DecComida;
+
 
 /**
  *
  * @author isaul
  */
 public class MenuBotonesComida extends javax.swing.JFrame  {
+    
+    // para la FACTURA
+    private DefaultTableModel modeloFactura;
+
+    // para saber que tipo de plato esta disponidble
+    private enum TipoPlato {
+        CAFE, ENSALADA, PIZZA
+    }
+    private TipoPlato tipoPlatoActual = null;
+
+    // Comida decorado actual (base + adicionales)
+    private Comida comidaActual = null;
+
+    // fila de la tabla donde está el producto base actual
+    private int filaProductoActual = -1;
+
+    // formatear precios
+    private String formatear(double v) {
+        return String.format("%.2f$", v);
+    }
+
 
     /**
      * Creates new form MenuBotonesComida
@@ -33,10 +71,98 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);
+        configurarTablaFactura();
+
+    }
+    
+    private void configurarTablaFactura() {
+        modeloFactura = new DefaultTableModel(
+                new Object[]{"Producto", "Adicional", "Precio", "Subtotal"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // no se edita a mano
+            }
+        };
+        tblFactura.setModel(modeloFactura);
+        agregarFilaTotal();
+    }
+
+    private void agregarFilaTotal() {
+        modeloFactura.addRow(new Object[]{"TOTAL:", "", "", formatear(0)});
+    }
+
+    private void actualizarTotal() {
+        double total = 0.0;
+        int filas = modeloFactura.getRowCount();
+        for (int i = 0; i < filas - 1; i++) { // todas menos la última (TOTAL)
+            Object val = modeloFactura.getValueAt(i, 3); // Subtotal
+            if (val != null) {
+                String txt = val.toString().replace("$", "").trim();
+                if (!txt.isEmpty()) {
+                    try {
+                        total += Double.parseDouble(txt.replace(",", "."));
+                    } catch (NumberFormatException ex) {
+                        // ignora si esta algo raro
+                    }
+                }
+            }
+        }
+        modeloFactura.setValueAt(formatear(total), filas - 1, 3);
+    }
+
+    private void seleccionarCafe() {
+        comidaActual = new Cafe();
+        tipoPlatoActual = TipoPlato.CAFE;
+
+        int filaTotal = modeloFactura.getRowCount() - 1; // última es TOTAL
+        filaProductoActual = filaTotal;
+
+        modeloFactura.insertRow(filaProductoActual, new Object[]{
+            "café", // Producto
+            "", // Adicional
+            formatear(comidaActual.getCosto()), // Precio (base)
+            formatear(comidaActual.getCosto()) // Subtotal (por ahora solo base)
+        });
+
+        actualizarTotal();
+    }
+
+    private void seleccionarEnsalada() {
+        comidaActual = new EnsaladaSencilla();
+        tipoPlatoActual = TipoPlato.ENSALADA;
+
+        int filaTotal = modeloFactura.getRowCount() - 1;
+        filaProductoActual = filaTotal;
+
+        modeloFactura.insertRow(filaProductoActual, new Object[]{
+            "ensalada sencilla",
+            "",
+            formatear(comidaActual.getCosto()),
+            formatear(comidaActual.getCosto())
+        });
+
+        actualizarTotal();
+    }
+
+    private void seleccionarPizza() {
+        comidaActual = new PizzaSencilla();
+        tipoPlatoActual = TipoPlato.PIZZA;
+
+        int filaTotal = modeloFactura.getRowCount() - 1;
+        filaProductoActual = filaTotal;
+
+        modeloFactura.insertRow(filaProductoActual, new Object[]{
+            "pizza sencilla",
+            "",
+            formatear(comidaActual.getCosto()),
+            formatear(comidaActual.getCosto())
+        });
+
+        actualizarTotal();
     }
 
 
-   
+   //FOTO FONDO
     private void hacerTransparentes(java.awt.Container c) {
         for (java.awt.Component comp : c.getComponents()) {
             if (comp instanceof javax.swing.JPanel) {
@@ -47,6 +173,100 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
             }
         }
     }
+    
+    //validador
+    private boolean validarAdicional(TipoPlato esperado) {
+        if (comidaActual == null || tipoPlatoActual != esperado || filaProductoActual < 0) {
+            JOptionPane.showMessageDialog(this,
+                    "NO puede seleccionar la opción adicional",
+                    "Advertencia",
+                    JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
+    //agregar adicional
+    private void agregarAdicional(DecComida decorador, String nombreAdicional) {
+        double costoAntes = comidaActual.getCosto();
+        comidaActual = decorador; // encadenamos el decorador
+        double costoDespues = comidaActual.getCosto();
+        double costoExtra = costoDespues - costoAntes;
+
+        // fila adicional ANTES del TOTAL
+        int filaTotal = modeloFactura.getRowCount() - 1;
+        modeloFactura.insertRow(filaTotal, new Object[]{
+            "", // producto vacío
+            nombreAdicional, // adicional
+            formatear(costoExtra), // precio del adicional
+            "" // subtotal solo en la fila del producto base
+        });
+
+        // actualizar subtotal del producto base actual
+        modeloFactura.setValueAt(formatear(costoDespues), filaProductoActual, 3);
+
+        actualizarTotal();
+    }
+    
+    //,etodos para botones de adicionales
+    private void accionAzucar() {
+        if (!validarAdicional(TipoPlato.CAFE)) {
+            return;
+        }
+        agregarAdicional(new DecAzucar(comidaActual), "azúcar");
+    }
+
+    private void accionCrema() {
+        if (!validarAdicional(TipoPlato.CAFE)) {
+            return;
+        }
+        agregarAdicional(new DecCrema(comidaActual), "crema");
+    }
+
+    private void accionTomate() {
+        if (!validarAdicional(TipoPlato.ENSALADA)) {
+            return;
+        }
+        agregarAdicional(new DecTomate(comidaActual), "tomate");
+    }
+
+    private void accionVinagreta() {
+        if (!validarAdicional(TipoPlato.ENSALADA)) {
+            return;
+        }
+        agregarAdicional(new DecVinagreta(comidaActual), "vinagreta");
+    }
+
+    private void accionPollo() {
+        if (!validarAdicional(TipoPlato.ENSALADA)) {
+            return;
+        }
+        agregarAdicional(new DecPollo(comidaActual), "pollo");
+    }
+
+    private void accionQueso() {
+        if (!validarAdicional(TipoPlato.PIZZA)) {
+            return;
+        }
+        agregarAdicional(new DecQueso(comidaActual), "queso");
+    }
+
+    private void accionSalami() {
+        if (!validarAdicional(TipoPlato.PIZZA)) {
+            return;
+        }
+        agregarAdicional(new DecSalami(comidaActual), "salami");
+    }
+
+    private void accionPepperoni() {
+        if (!validarAdicional(TipoPlato.PIZZA)) {
+            return;
+        }
+        agregarAdicional(new DecPepperoni(comidaActual), "pepperoni");
+    }
+
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,7 +281,7 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
         panelFactura = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblFactura = new javax.swing.JTable();
-        jLabel11 = new javax.swing.JLabel();
+        lblSubTFactura = new javax.swing.JLabel();
         pFCafe = new javax.swing.JPanel();
         lblFCafe = new javax.swing.JLabel();
         panelFCema = new javax.swing.JPanel();
@@ -105,15 +325,16 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
         botonQueso = new javax.swing.JButton();
         botonPizza = new javax.swing.JButton();
         panelFPeperoni = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        lblFPepperoni = new javax.swing.JLabel();
         panelBanner = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblTituloMenu = new javax.swing.JLabel();
 
         panelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         panelPrincipal.setPreferredSize(new java.awt.Dimension(1500, 1120));
 
         panelFactura.setBackground(new java.awt.Color(224, 239, 255));
 
+        tblFactura.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         tblFactura.setForeground(new java.awt.Color(153, 204, 255));
         tblFactura.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -128,9 +349,9 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
         ));
         jScrollPane1.setViewportView(tblFactura);
 
-        jLabel11.setFont(new java.awt.Font("Ebrima", 1, 36)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(153, 204, 255));
-        jLabel11.setText("FACTURA");
+        lblSubTFactura.setFont(new java.awt.Font("Ebrima", 1, 36)); // NOI18N
+        lblSubTFactura.setForeground(new java.awt.Color(153, 204, 255));
+        lblSubTFactura.setText("FACTURA");
 
         javax.swing.GroupLayout panelFacturaLayout = new javax.swing.GroupLayout(panelFactura);
         panelFactura.setLayout(panelFacturaLayout);
@@ -142,14 +363,14 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFacturaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel11)
+                .addComponent(lblSubTFactura)
                 .addGap(149, 149, 149))
         );
         panelFacturaLayout.setVerticalGroup(
             panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFacturaLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel11)
+                .addComponent(lblSubTFactura)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(140, Short.MAX_VALUE))
@@ -397,18 +618,38 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
         botonTomate.setBackground(new java.awt.Color(255, 255, 204));
         botonTomate.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         botonTomate.setText("+    Tomate");
+        botonTomate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonTomateActionPerformed(evt);
+            }
+        });
 
         botonPollo.setBackground(new java.awt.Color(255, 255, 204));
         botonPollo.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         botonPollo.setText("+    Pollo");
+        botonPollo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonPolloActionPerformed(evt);
+            }
+        });
 
         botonVinagreta.setBackground(new java.awt.Color(255, 255, 204));
         botonVinagreta.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         botonVinagreta.setText("+  Vinagreta");
+        botonVinagreta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVinagretaActionPerformed(evt);
+            }
+        });
 
         botonEnsalada.setBackground(new java.awt.Color(255, 255, 204));
         botonEnsalada.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         botonEnsalada.setText("+    Ensalada");
+        botonEnsalada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEnsaladaActionPerformed(evt);
+            }
+        });
 
         botonAzucar.setBackground(new java.awt.Color(255, 255, 204));
         botonAzucar.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
@@ -423,51 +664,81 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
         botonCrema.setBackground(new java.awt.Color(255, 255, 204));
         botonCrema.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         botonCrema.setText("+    Crema");
+        botonCrema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCremaActionPerformed(evt);
+            }
+        });
 
         botonCafe.setBackground(new java.awt.Color(255, 255, 204));
         botonCafe.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         botonCafe.setText("+    Cafe");
+        botonCafe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCafeActionPerformed(evt);
+            }
+        });
 
         botonSalami.setBackground(new java.awt.Color(255, 255, 204));
         botonSalami.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         botonSalami.setText("+    Salami");
+        botonSalami.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSalamiActionPerformed(evt);
+            }
+        });
 
         botonPepperoni.setBackground(new java.awt.Color(255, 255, 204));
         botonPepperoni.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         botonPepperoni.setText("+  Pepperoni");
         botonPepperoni.setPreferredSize(new java.awt.Dimension(91, 23));
+        botonPepperoni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonPepperoniActionPerformed(evt);
+            }
+        });
 
         botonQueso.setBackground(new java.awt.Color(255, 255, 204));
         botonQueso.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         botonQueso.setText("+    Queso");
+        botonQueso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonQuesoActionPerformed(evt);
+            }
+        });
 
         botonPizza.setBackground(new java.awt.Color(255, 255, 204));
         botonPizza.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         botonPizza.setText("+    Pizza");
+        botonPizza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonPizzaActionPerformed(evt);
+            }
+        });
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/pepperoni.jpg"))); // NOI18N
+        lblFPepperoni.setIcon(new javax.swing.ImageIcon(getClass().getResource("/decorador/pepperoni.jpg"))); // NOI18N
 
         javax.swing.GroupLayout panelFPeperoniLayout = new javax.swing.GroupLayout(panelFPeperoni);
         panelFPeperoni.setLayout(panelFPeperoniLayout);
         panelFPeperoniLayout.setHorizontalGroup(
             panelFPeperoniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFPeperoniLayout.createSequentialGroup()
-                .addComponent(jLabel7)
+                .addComponent(lblFPepperoni)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         panelFPeperoniLayout.setVerticalGroup(
             panelFPeperoniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFPeperoniLayout.createSequentialGroup()
-                .addComponent(jLabel7)
+                .addComponent(lblFPepperoni)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         panelBanner.setBackground(new java.awt.Color(153, 204, 255));
         panelBanner.setPreferredSize(new java.awt.Dimension(1043, 50));
 
-        jLabel1.setFont(new java.awt.Font("Ebrima", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 204));
-        jLabel1.setText("MENU");
+        lblTituloMenu.setFont(new java.awt.Font("Ebrima", 1, 36)); // NOI18N
+        lblTituloMenu.setForeground(new java.awt.Color(255, 255, 204));
+        lblTituloMenu.setText("MENU");
 
         javax.swing.GroupLayout panelBannerLayout = new javax.swing.GroupLayout(panelBanner);
         panelBanner.setLayout(panelBannerLayout);
@@ -475,13 +746,13 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
             panelBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBannerLayout.createSequentialGroup()
                 .addGap(682, 682, 682)
-                .addComponent(jLabel1)
+                .addComponent(lblTituloMenu)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBannerLayout.setVerticalGroup(
             panelBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBannerLayout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(lblTituloMenu)
                 .addGap(0, 9, Short.MAX_VALUE))
         );
 
@@ -629,11 +900,10 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonAzucarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAzucarActionPerformed
-        // TODO add your handling code here:
+        accionAzucar();
     }//GEN-LAST:event_botonAzucarActionPerformed
 
     private void txtfAzucarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfAzucarActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtfAzucarActionPerformed
 
     private void tctfEnsaladaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tctfEnsaladaActionPerformed
@@ -643,6 +913,37 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
     private void txtfQuesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfQuesoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtfQuesoActionPerformed
+
+    private void botonEnsaladaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEnsaladaActionPerformed
+seleccionarEnsalada();
+    }//GEN-LAST:event_botonEnsaladaActionPerformed
+
+    private void botonVinagretaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVinagretaActionPerformed
+accionVinagreta();    }//GEN-LAST:event_botonVinagretaActionPerformed
+
+    private void botonPolloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPolloActionPerformed
+accionPollo();    }//GEN-LAST:event_botonPolloActionPerformed
+
+    private void botonTomateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonTomateActionPerformed
+accionTomate();    }//GEN-LAST:event_botonTomateActionPerformed
+
+    private void botonPizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPizzaActionPerformed
+seleccionarPizza();    }//GEN-LAST:event_botonPizzaActionPerformed
+
+    private void botonQuesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonQuesoActionPerformed
+accionQueso();    }//GEN-LAST:event_botonQuesoActionPerformed
+
+    private void botonPepperoniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPepperoniActionPerformed
+accionPepperoni();    }//GEN-LAST:event_botonPepperoniActionPerformed
+
+    private void botonSalamiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalamiActionPerformed
+accionSalami();    }//GEN-LAST:event_botonSalamiActionPerformed
+
+    private void botonCremaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCremaActionPerformed
+accionCrema();    }//GEN-LAST:event_botonCremaActionPerformed
+
+    private void botonCafeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCafeActionPerformed
+seleccionarCafe();    }//GEN-LAST:event_botonCafeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -657,20 +958,20 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
     private javax.swing.JButton botonSalami;
     private javax.swing.JButton botonTomate;
     private javax.swing.JButton botonVinagreta;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFAzucar;
     private javax.swing.JLabel lblFCafe;
     private javax.swing.JLabel lblFCrema;
     private javax.swing.JLabel lblFEnsalada;
+    private javax.swing.JLabel lblFPepperoni;
     private javax.swing.JLabel lblFPizza;
     private javax.swing.JLabel lblFPollo;
     private javax.swing.JLabel lblFQueso;
     private javax.swing.JLabel lblFSalami;
     private javax.swing.JLabel lblFTomate;
     private javax.swing.JLabel lblFVinagreta;
+    private javax.swing.JLabel lblSubTFactura;
+    private javax.swing.JLabel lblTituloMenu;
     private javax.swing.JPanel pFCafe;
     private javax.swing.JPanel panelBanner;
     private javax.swing.JPanel panelFAzucar;
