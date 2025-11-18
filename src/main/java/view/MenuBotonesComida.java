@@ -110,12 +110,8 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
                 //convierte el texto quitando el $
                 String txt = val.toString().replace("$", "").trim();
                 if (!txt.isEmpty()) {
-                    try {
-                        //suma el número al total
-                        total += Double.parseDouble(txt.replace(",", "."));
-                    } catch (NumberFormatException ex) {
-                        //ignora si el texto no se puede convertir a numero
-                    }
+                    //suma el número al total
+                    total += Double.parseDouble(txt.replace(",", "."));
                 }
             }
         }
