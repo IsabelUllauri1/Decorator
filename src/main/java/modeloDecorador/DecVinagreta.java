@@ -1,4 +1,3 @@
-
 package modeloDecorador;
 
 /**
@@ -13,14 +12,12 @@ public class DecVinagreta extends DecComida {
 
     @Override
     public double getCosto() {
-        return comida.getCosto()+0.50 ; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        return comida.getCosto()+0.50 ; 
     }
 
     @Override
     public String getDescripcion() {
-        return comida.getDescripcion()+ ", vinagreta"; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        return comida.getDescripcion()+ ", vinagreta"; 
     }
-    
-    
     
 }

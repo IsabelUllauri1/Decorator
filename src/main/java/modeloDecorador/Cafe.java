@@ -18,7 +18,6 @@ public class Cafe implements Comida{
         costo = 2.20;
         descripcion = "Cafe";
     }
-    
 
     @Override
     public String getDescripcion() {

@@ -14,12 +14,12 @@ public class DecTomate extends DecComida
 
     @Override
     public double getCosto() {
-        return comida.getCosto()+ 1.10; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        return comida.getCosto()+ 1.10; 
     }
 
     @Override
     public String getDescripcion() {
-        return comida.getDescripcion()+", tomate"; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        return comida.getDescripcion()+", tomate"; 
     }
     
 }

@@ -74,6 +74,9 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
         
         //tabla factura
         configurarTablaFactura();
+        
+        //precios de la comida
+        inicializarPreciosCampos();
 
     }
     
@@ -90,6 +93,47 @@ public class MenuBotonesComida extends javax.swing.JFrame  {
         tblFactura.setModel(modeloFactura);
         //agrega al final la fila de total
         agregarFilaTotal();
+    }
+    
+    private void inicializarPreciosCampos(){
+        txtfCafe.setText(formatear(new Cafe().getCosto()));
+        txtfEnsalada.setText(formatear(new EnsaladaSencilla().getCosto()));  
+        tctfEnsalada.setText(formatear(new PizzaSencilla().getCosto()));
+        
+        //adicionales cafe
+        Comida baseCafe = new Cafe();
+        txtfCream.setText(formatear(new DecCrema(baseCafe).getCosto() - baseCafe.getCosto()));
+        baseCafe = new Cafe();
+        txtfAzucar.setText(formatear(new DecAzucar(baseCafe).getCosto() - baseCafe.getCosto()));
+        
+        //adicionales ensalada
+        Comida baseEnsalada = new EnsaladaSencilla();
+        txtfVinagreta.setText(formatear(new DecVinagreta(baseEnsalada).getCosto() - baseEnsalada.getCosto()));
+        baseEnsalada = new EnsaladaSencilla();
+        txtfPollo.setText(formatear(new DecPollo(baseEnsalada).getCosto() - baseEnsalada.getCosto()));
+        baseEnsalada = new EnsaladaSencilla();
+        txtfTomate.setText(formatear(new DecTomate(baseEnsalada).getCosto() - baseEnsalada.getCosto()));
+        
+        //adicionales pizza
+        Comida basePizza = new PizzaSencilla();
+        txtfQueso.setText(formatear(new DecQueso(basePizza).getCosto() - basePizza.getCosto()));
+        basePizza = new PizzaSencilla();
+        txtfPepperoni.setText(formatear(new DecPepperoni(basePizza).getCosto() - basePizza.getCosto()));
+        basePizza = new PizzaSencilla();
+        txtfSalami.setText(formatear(new DecSalami(basePizza).getCosto() - basePizza.getCosto()));
+        
+        //no se puede editar
+        txtfCafe.setEditable(false);
+        txtfEnsalada.setEditable(false);
+        tctfEnsalada.setEditable(false);
+        txtfCream.setEditable(false);
+        txtfAzucar.setEditable(false);
+        txtfVinagreta.setEditable(false);
+        txtfPollo.setEditable(false);
+        txtfTomate.setEditable(false);
+        txtfQueso.setEditable(false);
+        txtfPepperoni.setEditable(false);
+        txtfSalami.setEditable(false);
     }
 
     private void agregarFilaTotal() {
